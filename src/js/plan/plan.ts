@@ -1,5 +1,6 @@
 import PlanModel from "@/models/Plan";
 import { Ref } from "vue";
+import { Weapon } from "@/js/weapon/weapon";
 
 interface Options {
   health: number;
@@ -14,6 +15,7 @@ export class Plan {
   public size: number;
   public coordinates: [number, number] = [450, 425];
   public speed: number;
+  public weapon = new Weapon();
 
   readonly country = "Russia";
 
@@ -37,26 +39,22 @@ export class Plan {
         case "ArrowRight":
           return this.moveRight(target);
         case "Space":
-          console.log("fire");
+          this.weapon.shoot(target);
       }
     });
   }
 
   moveUp(target: Ref<HTMLDivElement>) {
     target.value.style.top = `${+target.value.style.top.replace("px", "") - this.speed}px`;
-    console.log("up", target.value.style.top);
   }
   moveDown(target: Ref<HTMLDivElement>) {
     target.value.style.top = `${+target.value.style.top.replace("px", "") + this.speed}px`;
-    console.log("down");
   }
   moveLeft(target: Ref<HTMLDivElement>) {
     target.value.style.left = `${+target.value.style.left.replace("px", "") - this.speed}px`;
-    console.log("left");
   }
   moveRight(target: Ref<HTMLDivElement>) {
     target.value.style.left = `${+target.value.style.left.replace("px", "") + this.speed}px`;
-    console.dir("rigth", target.value.style.right);
   }
 
   public baseStyle() {
