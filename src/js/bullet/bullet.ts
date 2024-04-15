@@ -3,7 +3,10 @@ import { Ref } from "vue";
 export class Bullet {
   constructor(private readonly target: Ref<HTMLDivElement>) {}
 
-  private move(target) {}
+  public shoot(target: Ref<HTMLDivElement>) {
+    
+    console.log(target.value.style.top, target.value.style.left)
+  }
 
   public bulletStyle() {
     return {

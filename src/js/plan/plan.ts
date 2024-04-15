@@ -13,17 +13,18 @@ export class Plan {
   public health: number;
   public attack: number;
   public size: number;
-  public coordinates: [number, number] = [450, 425];
+  public coordinates: [number, number] = [350, 325];
   public speed: number;
-  public weapon = new Weapon();
-
+  public weapon: Weapon;
+  
   readonly country = "Russia";
-
+  
   constructor(target: Ref<HTMLDivElement>, options: Options) {
     this.health = options.health;
     this.attack = options.attack;
     this.size = options.size;
     this.speed = options.speed;
+    this.weapon = new Weapon(target);
     this.init(target);
   }
 
@@ -55,14 +56,14 @@ export class Plan {
   }
   moveRight(target: Ref<HTMLDivElement>) {
     target.value.style.left = `${+target.value.style.left.replace("px", "") + this.speed}px`;
-  }
+  } 
 
   public baseStyle() {
     return {
       width: `${this.size}px`,
       height: `${this.size}px`,
-      top: "450px",
-      left: "425px",
+      top: `${this.coordinates[0]}px`,
+      left: `${this.coordinates[1]}px`,
       background: "white",
       position: "absolute",
     };
